@@ -1,21 +1,41 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+booktown=# SELECT *
+booktown-# FROM subjects;
 -- 2. Find all subjects sorted by location
+booktown=# SELECT *                                                                                          
+FROM subjects                                                                                                
+ORDER BY location;
 
 -- ### Where
 -- 3. Find the book "Little Women"
+booktown=# SELECT *                                                                                         
+FROM books                                                                                                   
+WHERE title IN ('little woman');
 -- 4. Find all books containing the word "Python"
+booktown=# SELECT *                                                                                          
+FROM books                                                                                                   
+WHERE title LIKE '%Python%';
 -- 5. Find all subjects with the location "Main St" sort them by subject
-
+booktown=# SELECT *                                                                                          
+FROM subjects
+booktown-# WHERE location = 'Main St';
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+booktown=# SELECT title
+booktown-# FROM books
+booktown-# WHERE subject_id = 4;
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+booktown=# SELECT authors.last_name, authors.first_name, books.title, subjects.subject                       
+FROM authors                                                                                                 
+JOIN books ON authors.id = books.author_id                                                                   
+JOIN subjects ON subjects.id = books.subject_id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
