@@ -20,11 +20,11 @@ ORDER BY subject;
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
-SELECT b.title FROM books b
-INNER JOIN subjects s
-ON b.subject_id = (
-SELECT id FROM subjects
-WHERE subject = 'Computers');
+SELECT b.title
+FROM books b
+JOIN subjects s
+ON b.subject_id = s.id
+WHERE subject = 'Computers';
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
@@ -32,24 +32,44 @@ WHERE subject = 'Computers');
 -- 	* Book subject
 SELECT b.title, a.first_name, a.last_name, s.subject
 FROM books b
-INNER JOIN authors a
-booktown-# ON b.author_id = a.id
-booktown-# INNER JOIN subjects s
-booktown-# ON b.subject_id = s.id;
+ON b.author_id = a.id
+JOIN subjects s
+ON b.subject_id = s.id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
+SELECT b.title, s.retail FROM books b
+JOIN editions e
+ON b.id = e.book_id
+JOIN stock s
+ON e.isbn = s.isbn;
+ORDER BY s.retail DESC;
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+SELECT b.title, e.isbn, p.name, s.retail FROM books b
+INNER JOIN editions e
+ON b.id = e.book_id
+JOIN stock s
+ON e.isbn = s.isbn
+JOIN publishers p
+ON e.publisher_id = p.id
+WHERE b.title = 'Dune';
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
-
+SELECT c.first_name, c.last_name, s.ship_date, b.title FROM shipments s
+JOIN customers c
+ON c.id = s.customer_id
+JOIN editions e
+ON s.isbn = e.isbn
+JOIN books b
+ON e.book_id = b.id
+ORDER BY s.ship_date;
 -- ### Grouping and Counting
 
 -- 11. Get the COUNT of all books
