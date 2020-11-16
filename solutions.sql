@@ -1,34 +1,59 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT * subject FROM books ORDER BY
 -- 2. Find all subjects sorted by location
+SELECT * subjects FROM subjects ORDER BY location;
 
 -- ### Where
 -- 3. Find the book "Little Women"
+SELECT * FROM books
+WHERE title = 'Little Women';
 -- 4. Find all books containing the word "Python"
+SELECT * FROM books WHERE title LIKE ('%Python%');
 -- 5. Find all subjects with the location "Main St" sort them by subject
-
+SELECT * FROM subjects WHERE location = 'Main St' ORDER BY subject;
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+SELECT title FROM books JOIN subjects ON subject_id = subjects.id WHERE subject = 'Computers';
+
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+SELECT title, first_name, last_name FROM books 
+JOIN subjects on subject_id = subjects.id
+JOIN authors on books.author_id = author_id;
+
+
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
+SELECT title, retail FROM books
+JOIN editions ON books.id = editions.book_id
+JOIN stock ON editions.isbn = stock.isbn
+ORDER BY retail DESC;
+
 -- 9. Find the book "Dune" and display ONLY the following columns
 -- 	* Book title
 -- 	* ISBN number
 -- 	* Publisher name
 -- 	* Retail price
+SELECT title, retail, editions.isbn, publishers.name FROM books
+JOIN editions ON books.id = editions.book_id
+JOIN stock ON editions.isbn = stock.isbn
+JOIN publishers ON editions.publisher_id = publishers.id
+WHERE title = 'Dune';
+
 -- 10. Find all shipments sorted by ship date display a result table with ONLY the following columns:
 -- 	* Customer first name
 -- 	* Customer last name
 -- 	* ship date
 -- 	* book title
+SELECT first_name, last_name, ship_date, title FROM books
+JOIN shipments ON books.id = 
 
 -- ### Grouping and Counting
 
