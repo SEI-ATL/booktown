@@ -1,12 +1,20 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+SELECT * FROM subjects;
 -- 2. Find all subjects sorted by location
-
+SELECT * FROM subjects
+ORDER BY location;
 -- ### Where
 -- 3. Find the book "Little Women"
+SELECT * FROM books
+WHERE title = 'Little Women';
 -- 4. Find all books containing the word "Python"
+SELECT * FROM books
+CONTAINS(Name, Python);
 -- 5. Find all subjects with the location "Main St" sort them by subject
-
+SELECT * FROM subjects
+WHERE location = 'Main St'
+ORDER BY subject;
 
 -- ### Joins
 
