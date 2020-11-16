@@ -4,14 +4,27 @@
 
 -- ### Where
 -- 3. Find the book "Little Women"
+SELECT * 
+FROM books
+WHERE title='little woman'
 -- 4. Find all books containing the word "Python"
+SELECT * 
+FROM books 
+WHERE title ='%Python%'
 -- 5. Find all subjects with the location "Main St" sort them by subject
-
+SELECT subject
+WHERE location = 'Main st'
+ORDER by subjects
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+
 -- 7. Find all books and display a result table with ONLY the following columns
+SELECT b.title, a.first_name, a.last_name, s.subject
+FROM books b
+INNER JOIN authors a 
+on
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
