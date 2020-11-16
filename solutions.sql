@@ -1,16 +1,29 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+booktown=# SELECT * FROM subjects
+booktown-# ORDER BY subject;
 -- 2. Find all subjects sorted by location
-
+booktown=# SELECT * FROM subjects
+ORDER BY location;
 -- ### Where
 -- 3. Find the book "Little Women"
+booktown=# SELECT * FROM BOOKS
+booktown-# WHERE title = 'Little Women';
 -- 4. Find all books containing the word "Python"
--- 5. Find all subjects with the location "Main St" sort them by subject
 
+SELECT * FROM books
+WHERE title like '%Python%';
+-- 5. Find all subjects with the location "Main St" sort them by subject
+booktown=# SELECT * FROM SUBJECTS
+booktown-# WHERE location = 'Main St'
+booktown-# ORDER BY subject;
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+booktown=# SELECT books.title                                                                                    
+FROM book_queue                                                                                                  
+INNER JOIN books ON book_queue.subject_id = books.subject_id;
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
