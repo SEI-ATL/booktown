@@ -1,7 +1,12 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+-- 1. Find all subjects sorted by subject
+SELECT subject FROM subjects
+ORDER BY subject;
 -- 2. Find all subjects sorted by location
-
+-- 2. Find all subjects sorted by location
+SELECT subject FROM subjects
+ORDER BY location;
 -- ### Where
 -- 3. Find the book "Little Women"
 SELECT * 
@@ -19,7 +24,11 @@ ORDER by subjects
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
-
+SELECT b.title FROM books b
+INNER JOIN subjects s
+ON b.subject_id = (
+SELECT id FROM subjects
+WHERE subject = ‘Computers’);
 -- 7. Find all books and display a result table with ONLY the following columns
 SELECT b.title, a.first_name, a.last_name, s.subject
 FROM books b
